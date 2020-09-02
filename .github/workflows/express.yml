@@ -20,13 +20,18 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           repository: ${{ secrets.DOCKERHUB_USERNAME }}/node-web-app-test
-          tags: latest,v1.0.1,registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web
+          tags: latest,v1.0.1
+
+      # Heroku stuff
+      - run: sudo snap install --classic heroku
 
       - uses: docker/login-action@v1
         with:
           registry: registry.heroku.com
           username: ${{ secrets.HEROKU_EMAIL }}
           password: ${{ secrets.HEROKU_API_KEY }}
+
+      - run: docker tag ${{ secrets.DOCKERHUB_USERNAME }}/node-web-app-test registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web
 
       - name: Push image
         run: docker push registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web
@@ -36,8 +41,6 @@ jobs:
           machine: api.heroku.com
           username: ${{ secrets.HEROKU_EMAIL }}
           password: ${{ secrets.HEROKU_API_KEY }}
-
-      - run: sudo snap install --classic heroku
 
       - name: Release on Heroku
         run: heroku container:release web --app ${{ secrets.HEROKU_APP_NAME }}
