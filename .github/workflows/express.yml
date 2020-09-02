@@ -55,7 +55,7 @@ jobs:
 
       #- name: Set Heroku credentials
       #  run: echo "\nmachine api.heroku.com\n  login ${{ secrets.HEROKU_EMAIL }}\n  password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
-      - uses: extractions/netrc@v1
+      - uses: extractions/netrc@80fc683
         with:
           machine: api.heroku.com
           username: ${{ secrets.HEROKU_EMAIL }}
