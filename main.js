@@ -8659,7 +8659,7 @@ app.get('/api', (req, res) => {
     res.send([{ message: 'Welcome to saas-api! ' + Math.random() }]);
 });
 const port = process.env.port || 3333;
-const host = process.env.host || 'localhost';
+const host = process.env.host || '0.0.0.0';
 const server = app.listen(port, host, () => {
     console.log(`Listening at http://${host}:${port}/api`);
 });
