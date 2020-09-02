@@ -8658,10 +8658,10 @@ const app = express__WEBPACK_IMPORTED_MODULE_0__();
 app.get('/api', (req, res) => {
     res.send([{ message: 'Welcome to saas-api! ' + Math.random() }]);
 });
-const port = process.env.PORT || 3333;
-const host = "0.0.0.0";
+const port = process.env.port || 3333;
+const host = process.env.host || 'localhost';
 const server = app.listen(port, host, () => {
-    console.log(`Listening at http://localhost:${port}/api`);
+    console.log(`Listening at http://${host}:${port}/api`);
 });
 server.on('error', console.error);
 
