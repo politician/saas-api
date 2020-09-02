@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: saas-api
+  namespace: saas-generic
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: saas-api
+  template:
+    metadata:
+      labels:
+        app: saas-api
+    spec:
+      containers:
+      - name: saas-api
+        image: iromain/node-web-app-test:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+      
