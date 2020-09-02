@@ -52,3 +52,11 @@ jobs:
 
       - name: Push image
         run: docker push registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web
+
+      - name: Set Heroku credentials
+        run: echo "\nmachine api.heroku.com\n  login ${{ secrets.HEROKU_EMAIL }}\n  password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
+
+      - run: sudo snap install --classic heroku
+
+      - name: Release on Heroku
+        run: heroku container:release web --app ${{ secrets.HEROKU_APP_NAME }}
