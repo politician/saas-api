@@ -8656,7 +8656,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const app = express__WEBPACK_IMPORTED_MODULE_0__();
 app.get('/api', (req, res) => {
-    res.send([{ message: 'Welcome to saas-api! ' + Math.random() }]);
+    res.send([{ message: 'Welcome to saas-api :) ' + Math.random() }]);
 });
 const port = process.env.PORT || 3000;
 const host = process.env.HOST || 'localhost';
