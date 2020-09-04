@@ -7,13 +7,15 @@ This means you have a little more work as a developer but it's totally worth it,
 
 ### Setup environment
 
-Install dependencies
+### Install dependencies
 
 ```sh
 brew install docker kind tilt-dev/tap/tilt kubectl
 ```
 
-Setup a local Kubernetes cluster with Kind
+### Setup a local Kubernetes cluster with Kind
+
+This is using Kind (Kubernetes in Docker)
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/tilt-dev/kind-local/master/kind-with-registry.sh | bash
