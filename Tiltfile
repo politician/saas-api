@@ -1,4 +1,4 @@
-trigger_mode(TRIGGER_MODE_MANUAL)
+# trigger_mode(TRIGGER_MODE_MANUAL)
 
 allow_k8s_contexts('k3d-local')
 
