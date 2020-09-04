@@ -1,4 +1,4 @@
-# Local development
+# Local Development
 
 ## Install toolchain
 
