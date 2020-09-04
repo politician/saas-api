@@ -1,0 +1,55 @@
+apiVersion: skaffold/v2beta6
+kind: Config
+metadata:
+  name: polystartup
+build:
+  artifacts:
+    - image: iromain/node-web-app-test
+      context: node-web-app-test
+    - image: iromain/node-web-app-test2
+      context: node-web-app-test2
+deploy:
+  kubectl:
+    manifests:
+      - k8s/*.yml
+  helm:
+    releases:
+      - name: supermongo
+        chartPath: bitnami/mongodb
+        remote: true
+        overrides:
+          architecture: replicaset
+          auth:
+            rootPassword: hellomongo!
+          # replicaSetName: rs-saas
+          # replicaCount: 3
+          # initdbScripts:
+          #   init.js: |
+          #     databases = ['db-1','db-2', 'db-3']
+
+          #     for (var i = databases.length - 1; i >= 0; i--) {
+          #       db = db.getSiblingDB(databases[i])
+
+          #       db.createUser({
+          #         user: "root",
+          #         pwd: "hellomongo!",
+          #         roles: ["readWrite"]
+          #       })
+
+          #       db.people.insert({ firstname: "kubernetes", lastname: databases[i] });
+          #     }
+          # pdb.create: true
+          # metrics.enabled: true
+      - name: rabbitmq-server
+        chartPath: bitnami/rabbitmq
+        remote: true
+# portForward:
+#   - resourceType: service
+#     resourceName: main-mongo-mongodb
+#     namespace: default #
+#     port: 27017 #
+portForward:
+  - resourceType: deployment
+    resourceName: iromain/node-web-app-test
+    port: 3000
+    localPort: 9000
